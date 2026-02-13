@@ -3,10 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <br>
-    <br>
-    <br>
-    <br>
     <title>Meysam Raza Portfolio</title>
     <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
     <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
@@ -161,29 +157,10 @@
             height: 500px;
             border-radius: 12px;
             overflow: hidden;
+            overflow-x: hidden;
             border: 2px solid rgba(102, 126, 234, 0.3);
             background: #000;
             transition: all 0.4s ease;
-            scrollbar-width: thin;
-            scrollbar-color: #1a1a1a #0a0a0f;
-        }
-
-        .iframe-container::-webkit-scrollbar {
-            width: 8px;
-            height: 8px;
-        }
-
-        .iframe-container::-webkit-scrollbar-track {
-            background: #0a0a0f;
-        }
-
-        .iframe-container::-webkit-scrollbar-thumb {
-            background: #1a1a1a;
-            border-radius: 4px;
-        }
-
-        .iframe-container::-webkit-scrollbar-thumb:hover {
-            background: #2a2a2a;
         }
 
         .iframe-container:hover {
@@ -191,7 +168,7 @@
             box-shadow: 0 10px 40px rgba(102, 126, 234, 0.3);
         }
 
-         .iframe-container iframe {
+        .iframe-container iframe {
             width: 117.65%;
             height: 117.65%;
             border: none;
@@ -199,12 +176,15 @@
             transform-origin: top left;
             pointer-events: auto;
         }
-        
+
+        /* Special handling for wider websites like Tooliso */
         .iframe-container iframe[src*="tooliso"] {
             transform: scale(0.7);
             width: 142.86%;
             height: 142.86%;
         }
+        
+        
         
         .experience-card {
             background: linear-gradient(135deg, rgba(17, 17, 27, 0.6) 0%, rgba(17, 17, 27, 0.3) 100%);
@@ -231,45 +211,99 @@
             transform: translateY(-5px) scale(1.05);
         }
 
-        /* Custom Cursor Pointer Tracker */
-        .cursor-dot {
+        /* Pointer Gradient Mesh Effect */
+        .pointer-glow {
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 8px;
-            height: 8px;
-            background: linear-gradient(135deg, #667eea, #764ba2);
+            width: 600px;
+            height: 600px;
             border-radius: 50%;
             pointer-events: none;
-            z-index: 9999;
-            transition: transform 0.15s ease;
-            box-shadow: 0 0 20px rgba(102, 126, 234, 0.6);
+            z-index: 1;
+            background: radial-gradient(circle, rgba(102, 126, 234, 0.15) 0%, transparent 70%);
+            filter: blur(60px);
+            opacity: 0;
+            transition: opacity 0.3s ease;
         }
 
-        .cursor-outline {
+        /* Hide pointer effect on mobile */
+        @media (max-width: 768px) {
+            .pointer-glow {
+                display: none;
+            }
+        }
+
+        body:hover .pointer-glow {
+            opacity: 1;
+        }
+
+        /* Mobile Menu Styles */
+        .mobile-menu {
+            display: none;
             position: fixed;
-            top: 0;
+            top: 70px;
             left: 0;
-            width: 30px;
-            height: 30px;
-            border: 2px solid rgba(102, 126, 234, 0.5);
-            border-radius: 50%;
-            pointer-events: none;
-            z-index: 9998;
-            transition: transform 0.2s ease, width 0.2s ease, height 0.2s ease, opacity 0.2s ease;
+            right: 0;
+            background: #0a0a0f;
+            border-top: 1px solid rgba(102, 126, 234, 0.2);
+            padding: 1rem;
+            z-index: 40;
         }
 
-        a:hover ~ .cursor-outline,
-        button:hover ~ .cursor-outline {
-            width: 50px;
-            height: 50px;
-            opacity: 0.6;
+        .mobile-menu.active {
+            display: block;
+        }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 4px;
+        }
+
+        .hamburger span {
+            width: 25px;
+            height: 3px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 2px;
+            transition: all 0.3s ease;
+        }
+
+        .hamburger.active span:nth-child(1) {
+            transform: rotate(45deg) translate(5px, 5px);
+        }
+
+        .hamburger.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .hamburger.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(7px, -6px);
+        }
+
+        @media (max-width: 768px) {
+            .desktop-nav {
+                display: none !important;
+            }
+
+            .hamburger {
+                display: flex;
+            }
+
+            .nav-link {
+                display: block;
+                padding: 1rem;
+                text-align: center;
+                border-bottom: 1px solid rgba(102, 126, 234, 0.1);
+            }
+
+            .nav-link::after {
+                display: none;
+            }
         }
     </style>
 </head>
 <body>
-    <div class="cursor-dot" id="cursor-dot"></div>
-    <div class="cursor-outline" id="cursor-outline"></div>
+    <div class="pointer-glow" id="pointer-glow"></div>
     <div id="particles-js"></div>
     <div id="root" class="content-wrapper"></div>
 
@@ -359,30 +393,28 @@
             retina_detect: true
         });
 
-        // Custom Cursor Tracker
-        const cursorDot = document.getElementById('cursor-dot');
-        const cursorOutline = document.getElementById('cursor-outline');
-
-        let mouseX = 0, mouseY = 0;
-        let outlineX = 0, outlineY = 0;
+        // Pointer Gradient Mesh Distortion Effect
+        const pointerGlow = document.getElementById('pointer-glow');
+        
+        let glowX = 0, glowY = 0;
+        let currentX = 0, currentY = 0;
 
         document.addEventListener('mousemove', (e) => {
-            mouseX = e.clientX;
-            mouseY = e.clientY;
-            
-            cursorDot.style.transform = `translate(${mouseX - 4}px, ${mouseY - 4}px)`;
+            glowX = e.clientX;
+            glowY = e.clientY;
         });
 
-        function animateOutline() {
-            outlineX += (mouseX - outlineX) * 0.15;
-            outlineY += (mouseY - outlineY) * 0.15;
+        function animateGlow() {
+            // Smooth follow with easing
+            currentX += (glowX - currentX) * 0.1;
+            currentY += (glowY - currentY) * 0.1;
             
-            cursorOutline.style.transform = `translate(${outlineX - 15}px, ${outlineY - 15}px)`;
+            pointerGlow.style.transform = `translate(${currentX - 300}px, ${currentY - 300}px)`;
             
-            requestAnimationFrame(animateOutline);
+            requestAnimationFrame(animateGlow);
         }
 
-        animateOutline();
+        animateGlow();
     </script>
 
     <script type="text/babel">
@@ -472,6 +504,7 @@
         const Portfolio = () => {
             const [scrolled, setScrolled] = useState(false);
             const [activeSection, setActiveSection] = useState('home');
+            const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
             useEffect(() => {
                 const handleScroll = () => {
@@ -497,10 +530,31 @@
                 const element = document.getElementById(id);
                 if (element) {
                     element.scrollIntoView({ behavior: 'smooth' });
+                    setMobileMenuOpen(false);
                 }
             };
 
+            const toggleMobileMenu = () => {
+                setMobileMenuOpen(!mobileMenuOpen);
+            };
+
             const projects = [
+                {
+                    title: "Tooliso",
+                    client: "Serious Software for Serious Business",
+                    description: "Enterprise-grade software platform where serious businesses build powerful custom solutions. From fast-moving startups to forward-thinking enterprises, we partner with visionaries to craft platforms, apps, and systems that deliver ROI.",
+                    features: [
+                        "Custom platform development",
+                        "Scalable enterprise solutions",
+                        "Product-minded technology",
+                        "ROI-focused development",
+                        "Speed and performance optimization"
+                    ],
+                    tech: ["React", "Node.js", "PostgreSQL", "AWS", "TypeScript"],
+                    url: "https://www.tooliso.com/",
+                    impact: "Creating competitive advantage through powerful software",
+                    gradient: "from-purple-600 to-indigo-600"
+                },
                 {
                     title: "Omendon",
                     client: "Nordic-UAE Market Expansion",
@@ -516,21 +570,6 @@
                     url: "https://www.omendon.com/",
                     impact: "Bridging Nordic excellence with UAE opportunities",
                     gradient: "from-blue-600 to-teal-600"
-                },
-                {
-                    title: "Devnesty",
-                    client: "Marketing Agency Website",
-                    description: "Multi-page marketing website with integrated lead generation and custom animations matching brand identity. Professional showcase of services and results.",
-                    features: [
-                        "Services showcase page",
-                        "Results & portfolio section",
-                        "Custom animations",
-                        "Lead management dashboard"
-                    ],
-                    tech: ["HTML", "CSS", "JavaScript", "PHP", "MySQL"],
-                    url: "https://devnesty.com/",
-                    impact: "Professional online presence generating qualified leads",
-                    gradient: "from-emerald-600 to-teal-500"
                 },
                 {
                     title: "Crystal Sky Travel",
@@ -549,20 +588,19 @@
                     gradient: "from-blue-600 to-cyan-500"
                 },
                 {
-                    title: "Tooliso",
-                    client: "Serious Software for Serious Business",
-                    description: "Enterprise-grade software platform where serious businesses build powerful custom solutions. From fast-moving startups to forward-thinking enterprises, we partner with visionaries to craft platforms, apps, and systems that deliver ROI.",
+                    title: "Devnesty",
+                    client: "Marketing Agency Website",
+                    description: "Multi-page marketing website with integrated lead generation and custom animations matching brand identity. Professional showcase of services and results.",
                     features: [
-                        "Custom platform development",
-                        "Scalable enterprise solutions",
-                        "Product-minded technology",
-                        "ROI-focused development",
-                        "Speed and performance optimization"
+                        "Services showcase page",
+                        "Results & portfolio section",
+                        "Custom animations",
+                        "Lead management dashboard"
                     ],
-                    tech: ["React", "Node.js", "PostgreSQL", "AWS", "TypeScript"],
-                    url: "https://www.tooliso.com/",
-                    impact: "Creating competitive advantage through powerful software",
-                    gradient: "from-purple-600 to-indigo-600"
+                    tech: ["HTML", "CSS", "JavaScript", "PHP", "MySQL"],
+                    url: "https://devnesty.com/",
+                    impact: "Professional online presence generating qualified leads",
+                    gradient: "from-emerald-600 to-teal-500"
                 },
                 {
                     title: "Rajpoot Motors",
@@ -630,8 +668,10 @@
                     <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled ? 'bg-[#0a0a0f]/95 backdrop-blur-md shadow-lg' : 'bg-transparent'}`}>
                         <div className="max-w-7xl mx-auto px-6 py-4">
                             <div className="flex justify-between items-center">
-                                <div className="text-2xl font-bold gradient-text code-font">&lt;Meysam Raza/&gt;</div>
-                                <div className="flex items-center space-x-2">
+                                <div className="text-xl md:text-2xl font-bold gradient-text code-font">&lt;Meysam Raza/&gt;</div>
+                                
+                                {/* Desktop Navigation */}
+                                <div className="desktop-nav flex items-center space-x-2">
                                     {['Home', 'About', 'Projects', 'Experience', 'Skills', 'Contact'].map((item) => (
                                         <button
                                             key={item}
@@ -642,7 +682,27 @@
                                         </button>
                                     ))}
                                 </div>
+
+                                {/* Mobile Hamburger */}
+                                <div className={`hamburger ${mobileMenuOpen ? 'active' : ''}`} onClick={toggleMobileMenu}>
+                                    <span></span>
+                                    <span></span>
+                                    <span></span>
+                                </div>
                             </div>
+                        </div>
+
+                        {/* Mobile Menu */}
+                        <div className={`mobile-menu ${mobileMenuOpen ? 'active' : ''}`}>
+                            {['Home', 'About', 'Projects', 'Experience', 'Skills', 'Contact'].map((item) => (
+                                <button
+                                    key={item}
+                                    onClick={() => scrollToSection(item.toLowerCase())}
+                                    className={`nav-link capitalize hover:text-purple-400 transition-colors w-full ${activeSection === item.toLowerCase() ? 'text-purple-400' : ''}`}
+                                >
+                                    {item}
+                                </button>
+                            ))}
                         </div>
                     </nav>
 
@@ -654,7 +714,7 @@
                         </div>
                         
                         <div className="max-w-7xl mx-auto px-6 text-center z-10 fade-in">
-                            <div className="mb-6">
+                            <div className="mb-6 mt-20">
                                 <span className="code-font text-purple-400 text-sm tracking-wider">FULL-STACK DEVELOPER</span>
                             </div>
                             <h1 className="text-5xl md:text-8xl font-black mb-6 leading-tight">
@@ -699,7 +759,7 @@
                                 </h2>
                                 <div className="max-w-4xl mx-auto">
                                     <p className="text-gray-400 text-lg mb-6 leading-relaxed">
-                                       I'm a full-stack developer with 2 years of experience building platforms that make money, save time, and scale without limits. From CRM systems managing 50+ employees to dynamic travel platforms automating lead distribution, I create solutions that solve real business problems.
+                                        I'm a full-stack developer with 2 years of experience building platforms that make money, save time, and scale without limits. From CRM systems managing 50+ employees to dynamic travel platforms automating lead distribution, I create solutions that solve real business problems.
                                     </p>
                                     <p className="text-gray-400 text-lg mb-8 leading-relaxed">
                                         My expertise spans React, PHP, MySQL, and JavaScript, with a focus on creating custom systems that drive business automation and operational efficiency. I've worked with forward-thinking companies like Tooliso, Omendon, and Devnesty to deliver results-driven solutions.
@@ -707,7 +767,7 @@
                                 </div>
                                 
                                 <div className="flex justify-center flex-wrap gap-3 max-w-2xl mx-auto mb-16">
-                                    {["React", "MySQL", "JavaScript", "HTML5", "CSS3", "CRM Systems", "APIs"].map((tech, i) => (
+                                    {["React", "PHP", "MySQL", "JavaScript", "HTML5", "CSS3", "CRM Systems", "APIs"].map((tech, i) => (
                                         <div 
                                             key={tech}
                                             className="tech-badge bg-gradient-to-br from-purple-600/20 to-blue-600/20 border border-purple-500/30 rounded-lg px-4 py-2 text-sm font-semibold"
