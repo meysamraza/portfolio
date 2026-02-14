@@ -3,843 +3,234 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Meysam Raza Portfolio</title>
+    <title>Meysam Raza - Full-Stack Developer</title>
+    
+    <!-- React and Babel -->
     <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
     <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    
+    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
-        
+
         body {
-            font-family: 'Outfit', sans-serif;
-            background: #0a0a0f;
-        }
-
-        #particles-js {
-            position: fixed;
-            width: 100%;
-            height: 100%;
-            top: 0;
-            left: 0;
-            z-index: 1;
-            pointer-events: none;
-        }
-
-        .content-wrapper {
-            position: relative;
-            z-index: 2;
-        }
-        
-        .gradient-text {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-        
-        .glow-effect {
-            box-shadow: 0 0 40px rgba(102, 126, 234, 0.3);
-        }
-        
-        .card-glow {
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-        
-        .card-glow:hover {
-            transform: translateY(-8px) scale(1.02);
-            box-shadow: 0 20px 60px rgba(102, 126, 234, 0.5);
-        }
-        
-        .tech-badge {
-            display: inline-block;
-            animation: float 3s ease-in-out infinite;
-        }
-        
-        @keyframes float {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-5px); }
-        }
-        
-        .fade-in {
-            animation: fadeIn 0.8s ease-in;
-        }
-        
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        
-        .slide-in-left {
-            animation: slideInLeft 0.6s ease-out;
-        }
-        
-        @keyframes slideInLeft {
-            from { opacity: 0; transform: translateX(-50px); }
-            to { opacity: 1; transform: translateX(0); }
-        }
-
-        .zoom-in {
-            animation: zoomIn 0.5s ease-out;
-        }
-
-        @keyframes zoomIn {
-            from { opacity: 0; transform: scale(0.9); }
-            to { opacity: 1; transform: scale(1); }
-        }
-        
-        .bg-mesh {
-            background: 
-                radial-gradient(at 0% 0%, rgba(102, 126, 234, 0.1) 0px, transparent 50%),
-                radial-gradient(at 100% 0%, rgba(118, 75, 162, 0.1) 0px, transparent 50%),
-                radial-gradient(at 100% 100%, rgba(102, 126, 234, 0.1) 0px, transparent 50%),
-                radial-gradient(at 0% 100%, rgba(118, 75, 162, 0.1) 0px, transparent 50%);
-        }
-        
-        .code-font {
-            font-family: 'JetBrains Mono', monospace;
-        }
-        
-        .scroll-indicator {
-            animation: bounce 2s infinite;
-        }
-        
-        @keyframes bounce {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(10px); }
-        }
-        
-        .nav-link {
-            position: relative;
-            padding: 0.5rem 1rem;
-        }
-        
-        .nav-link::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 0;
-            height: 2px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            transition: width 0.3s ease;
-        }
-        
-        .nav-link:hover::after,
-        .nav-link.active::after {
-            width: 80%;
-        }
-        
-        .project-card {
-            background: linear-gradient(135deg, rgba(17, 17, 27, 0.8) 0%, rgba(17, 17, 27, 0.4) 100%);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(102, 126, 234, 0.2);
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        .project-card:hover {
-            transform: scale(1.02);
-            border-color: rgba(102, 126, 234, 0.5);
-        }
-
-        .iframe-container {
-            position: relative;
-            width: 100%;
-            height: 500px;
-            border-radius: 12px;
-            overflow: hidden;
+            font-family: 'Space Grotesk', -apple-system, sans-serif;
             overflow-x: hidden;
-            border: 2px solid rgba(102, 126, 234, 0.3);
-            background: #000;
-            transition: all 0.4s ease;
+            background: #0a0a0a;
         }
 
-        .iframe-container:hover {
-            border-color: rgba(102, 126, 234, 0.6);
-            box-shadow: 0 10px 40px rgba(102, 126, 234, 0.3);
-        }
-
-        .iframe-container iframe {
-            width: 117.65%;
-            height: 117.65%;
-            border: none;
-            transform: scale(0.85);
-            transform-origin: top left;
-            pointer-events: auto;
-        }
-
-        /* Special handling for wider websites like Tooliso */
-        .iframe-container iframe[src*="tooliso"] {
-            transform: scale(0.7);
-            width: 142.86%;
-            height: 142.86%;
-        }
-        
-        
-        
-        .experience-card {
-            background: linear-gradient(135deg, rgba(17, 17, 27, 0.6) 0%, rgba(17, 17, 27, 0.3) 100%);
-            backdrop-filter: blur(8px);
-            border-left: 3px solid #667eea;
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        .experience-card:hover {
-            transform: translateX(8px) scale(1.02);
-            border-left-width: 5px;
-            box-shadow: 0 10px 40px rgba(102, 126, 234, 0.3);
-        }
-
-        html {
-            scroll-behavior: smooth;
-        }
-
-        .stat-card {
-            transition: all 0.3s ease;
-        }
-
-        .stat-card:hover {
-            transform: translateY(-5px) scale(1.05);
-        }
-
-        /* Pointer Gradient Mesh Effect */
-        .pointer-glow {
-            position: fixed;
-            width: 600px;
-            height: 600px;
-            border-radius: 50%;
-            pointer-events: none;
-            z-index: 1;
-            background: radial-gradient(circle, rgba(102, 126, 234, 0.15) 0%, transparent 70%);
-            filter: blur(60px);
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-
-        /* Hide pointer effect on mobile */
-        @media (max-width: 768px) {
-            .pointer-glow {
-                display: none;
-            }
-        }
-
-        body:hover .pointer-glow {
-            opacity: 1;
-        }
-
-        /* Mobile Menu Styles */
-        .mobile-menu {
-            display: none;
-            position: fixed;
-            top: 70px;
-            left: 0;
-            right: 0;
-            background: #0a0a0f;
-            border-top: 1px solid rgba(102, 126, 234, 0.2);
-            padding: 1rem;
-            z-index: 40;
-        }
-
-        .mobile-menu.active {
-            display: block;
-        }
-
-        .hamburger {
-            display: none;
-            flex-direction: column;
-            cursor: pointer;
-            gap: 4px;
-        }
-
-        .hamburger span {
-            width: 25px;
-            height: 3px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            border-radius: 2px;
-            transition: all 0.3s ease;
-        }
-
-        .hamburger.active span:nth-child(1) {
-            transform: rotate(45deg) translate(5px, 5px);
-        }
-
-        .hamburger.active span:nth-child(2) {
-            opacity: 0;
-        }
-
-        .hamburger.active span:nth-child(3) {
-            transform: rotate(-45deg) translate(7px, -6px);
-        }
-
-        @media (max-width: 768px) {
-            .desktop-nav {
-                display: none !important;
-            }
-
-            .hamburger {
-                display: flex;
-            }
-
-            .nav-link {
-                display: block;
-                padding: 1rem;
-                text-align: center;
-                border-bottom: 1px solid rgba(102, 126, 234, 0.1);
-            }
-
-            .nav-link::after {
-                display: none;
-            }
+        #root {
+            width: 100%;
+            min-height: 100vh;
         }
     </style>
 </head>
 <body>
-    <div class="pointer-glow" id="pointer-glow"></div>
-    <div id="particles-js"></div>
-    <div id="root" class="content-wrapper"></div>
-
-    <script>
-        // Particle.js configuration
-        particlesJS('particles-js', {
-            particles: {
-                number: {
-                    value: 80,
-                    density: {
-                        enable: true,
-                        value_area: 800
-                    }
-                },
-                color: {
-                    value: '#667eea'
-                },
-                shape: {
-                    type: 'circle',
-                    stroke: {
-                        width: 0,
-                        color: '#000000'
-                    },
-                },
-                opacity: {
-                    value: 0.3,
-                    random: true,
-                    anim: {
-                        enable: true,
-                        speed: 1,
-                        opacity_min: 0.1,
-                        sync: false
-                    }
-                },
-                size: {
-                    value: 3,
-                    random: true,
-                    anim: {
-                        enable: true,
-                        speed: 2,
-                        size_min: 0.1,
-                        sync: false
-                    }
-                },
-                line_linked: {
-                    enable: true,
-                    distance: 150,
-                    color: '#667eea',
-                    opacity: 0.2,
-                    width: 1
-                },
-                move: {
-                    enable: true,
-                    speed: 2,
-                    direction: 'none',
-                    random: false,
-                    straight: false,
-                    out_mode: 'out',
-                    bounce: false,
-                }
-            },
-            interactivity: {
-                detect_on: 'canvas',
-                events: {
-                    onhover: {
-                        enable: true,
-                        mode: 'grab'
-                    },
-                    onclick: {
-                        enable: true,
-                        mode: 'push'
-                    },
-                    resize: true
-                },
-                modes: {
-                    grab: {
-                        distance: 140,
-                        line_linked: {
-                            opacity: 0.5
-                        }
-                    },
-                    push: {
-                        particles_nb: 4
-                    }
-                }
-            },
-            retina_detect: true
-        });
-
-        // Pointer Gradient Mesh Distortion Effect
-        const pointerGlow = document.getElementById('pointer-glow');
-        
-        let glowX = 0, glowY = 0;
-        let currentX = 0, currentY = 0;
-
-        document.addEventListener('mousemove', (e) => {
-            glowX = e.clientX;
-            glowY = e.clientY;
-        });
-
-        function animateGlow() {
-            // Smooth follow with easing
-            currentX += (glowX - currentX) * 0.1;
-            currentY += (glowY - currentY) * 0.1;
-            
-            pointerGlow.style.transform = `translate(${currentX - 300}px, ${currentY - 300}px)`;
-            
-            requestAnimationFrame(animateGlow);
-        }
-
-        animateGlow();
-    </script>
+    <div id="root"></div>
 
     <script type="text/babel">
         const { useState, useEffect } = React;
 
-        // Lucide React Icons as inline SVG components
-        const ChevronDown = () => (
-            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <polyline points="6 9 12 15 18 9"></polyline>
-            </svg>
-        );
-
-        const ArrowRight = ({ size = 20 }) => (
-            <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <line x1="5" y1="12" x2="19" y2="12"></line>
-                <polyline points="12 5 19 12 12 19"></polyline>
-            </svg>
-        );
-
         const ExternalLink = ({ size = 24 }) => (
-            <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                 <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
                 <polyline points="15 3 21 3 21 9"></polyline>
                 <line x1="10" y1="14" x2="21" y2="3"></line>
             </svg>
         );
 
-        const Code = ({ size = 40 }) => (
-            <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <polyline points="16 18 22 12 16 6"></polyline>
-                <polyline points="8 6 2 12 8 18"></polyline>
-            </svg>
-        );
-
-        const Users = ({ size = 40 }) => (
-            <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
-                <circle cx="9" cy="7" r="4"></circle>
-                <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
-                <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
-            </svg>
-        );
-
-        const Zap = ({ size = 40 }) => (
-            <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
-            </svg>
-        );
-
-        const Database = ({ size = 40 }) => (
-            <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <ellipse cx="12" cy="5" rx="9" ry="3"></ellipse>
-                <path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"></path>
-                <path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"></path>
-            </svg>
-        );
-
-        const Layers = ({ size = 16 }) => (
-            <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
-                <polyline points="2 17 12 22 22 17"></polyline>
-                <polyline points="2 12 12 17 22 12"></polyline>
-            </svg>
-        );
-
-        const Mail = ({ size = 20 }) => (
-            <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
-                <polyline points="22,6 12,13 2,6"></polyline>
-            </svg>
-        );
-
-        const Linkedin = ({ size = 20 }) => (
-            <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
-                <rect x="2" y="9" width="4" height="12"></rect>
-                <circle cx="4" cy="4" r="2"></circle>
-            </svg>
-        );
-
-        const Github = ({ size = 20 }) => (
-            <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+        const ArrowRight = ({ size = 24 }) => (
+            <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+                <polyline points="12 5 19 12 12 19"></polyline>
             </svg>
         );
 
         const Portfolio = () => {
             const [scrolled, setScrolled] = useState(false);
-            const [activeSection, setActiveSection] = useState('home');
-            const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
             useEffect(() => {
                 const handleScroll = () => {
                     setScrolled(window.scrollY > 50);
-                    
-                    const sections = ['home', 'about', 'projects', 'experience', 'skills', 'contact'];
-                    const current = sections.find(section => {
-                        const element = document.getElementById(section);
-                        if (element) {
-                            const rect = element.getBoundingClientRect();
-                            return rect.top <= 100 && rect.bottom >= 100;
-                        }
-                        return false;
-                    });
-                    if (current) setActiveSection(current);
                 };
-
                 window.addEventListener('scroll', handleScroll);
                 return () => window.removeEventListener('scroll', handleScroll);
             }, []);
 
             const scrollToSection = (id) => {
-                const element = document.getElementById(id);
-                if (element) {
-                    element.scrollIntoView({ behavior: 'smooth' });
-                    setMobileMenuOpen(false);
-                }
-            };
-
-            const toggleMobileMenu = () => {
-                setMobileMenuOpen(!mobileMenuOpen);
+                document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
             };
 
             const projects = [
                 {
-                    title: "Tooliso",
-                    client: "Serious Software for Serious Business",
-                    description: "Enterprise-grade software platform where serious businesses build powerful custom solutions. From fast-moving startups to forward-thinking enterprises, we partner with visionaries to craft platforms, apps, and systems that deliver ROI.",
-                    features: [
-                        "Custom platform development",
-                        "Scalable enterprise solutions",
-                        "Product-minded technology",
-                        "ROI-focused development",
-                        "Speed and performance optimization"
-                    ],
-                    tech: ["React", "Node.js", "PostgreSQL", "AWS", "TypeScript"],
-                    url: "https://www.tooliso.com/",
-                    impact: "Creating competitive advantage through powerful software",
-                    gradient: "from-purple-600 to-indigo-600"
-                },
-                {
-                    title: "Omendon",
-                    client: "Nordic-UAE Market Expansion",
-                    description: "Strategic consulting platform helping Finnish and Nordic companies expand their sales to the UAE market. Comprehensive market entry solutions and business development services.",
-                    features: [
-                        "Market expansion strategy",
-                        "UAE market entry consulting",
-                        "Business development services",
-                        "Nordic-UAE partnership facilitation",
-                        "Sales growth optimization"
-                    ],
-                    tech: ["React", "PHP", "MySQL", "JavaScript"],
+                    number: "01",
+                    title: "OMENDON",
+                    subtitle: "MARKET EXPANSION",
+                    tagline: "Nordic-UAE business bridge",
+                    description: "Consulting and sales solutions for Finnish and Nordic companies expanding to UAE. Strategic market entry platform with comprehensive business intelligence.",
                     url: "https://www.omendon.com/",
-                    impact: "Bridging Nordic excellence with UAE opportunities",
-                    gradient: "from-blue-600 to-teal-600"
+                    tech: ["PHP", "MySQL", "JavaScript", "REST APIs"],
+                    impact: "Connecting Nordic innovation with UAE opportunities"
                 },
                 {
-                    title: "Crystal Sky Travel",
-                    client: "Dynamic Travel Platform",
-                    description: "Comprehensive travel booking platform with full admin control. Dynamic page generation system where admins create pages from the backend, automatic Meta lead integration with equal agent distribution.",
-                    features: [
-                        "Multi-page dynamic architecture",
-                        "Admin dashboard with complete website control",
-                        "Meta Ads lead integration",
-                        "Automated lead distribution",
-                        "Package showcase with carousels"
-                    ],
-                    tech: ["React", "PHP", "MySQL", "JavaScript", "CSS"],
+                    number: "02",
+                    title: "CRYSTAL SKY",
+                    subtitle: "TRAVEL PLATFORM",
+                    tagline: "Dynamic travel ecosystem",
+                    description: "Comprehensive booking platform with Meta lead integration and automated distribution. Complete travel management built for scale.",
                     url: "https://crystalskytravels.co.uk/",
-                    impact: "Automated lead management saving 15+ hours/week",
-                    gradient: "from-blue-600 to-cyan-500"
+                    tech: ["React", "PHP", "MySQL", "JavaScript"],
+                    impact: "15+ hours/week saved through automation"
                 },
                 {
-                    title: "Devnesty",
-                    client: "Marketing Agency Website",
-                    description: "Multi-page marketing website with integrated lead generation and custom animations matching brand identity. Professional showcase of services and results.",
-                    features: [
-                        "Services showcase page",
-                        "Results & portfolio section",
-                        "Custom animations",
-                        "Lead management dashboard"
-                    ],
-                    tech: ["HTML", "CSS", "JavaScript", "PHP", "MySQL"],
-                    url: "https://devnesty.com/",
-                    impact: "Professional online presence generating qualified leads",
-                    gradient: "from-emerald-600 to-teal-500"
+                    number: "03",
+                    title: "DEVNESTY CRM",
+                    subtitle: "ENTERPRISE CRM SYSTEM",
+                    tagline: "Multi-role business management platform",
+                    description: "Created multiple CRM's with role-based access for Admin, Manager, HR, Team Lead, and Agent. Features include clock-in/clock-out, attendance tracking, screen monitoring, payroll systems, leave systems, loan/advance systems, delegation systems. HR can enroll new employees and manage departments. Admin dashboard provides company-wide overview. Built-in communication hub and much more. Demo credentials available upon request.",
+                    url: "https://devnesty.com/crm/public/index.php",
+                    tech: ["PHP", "MySQL", "JavaScript", "Chart.js", "Bootstrap"],
+                    impact: "Complete business operations automation for 50+ employees"
                 },
                 {
-                    title: "Rajpoot Motors",
-                    client: "Automotive Dealership Platform",
-                    description: "Digital showroom platform showcasing inventory, services, and dealership information with integrated inquiry system for JAC vehicles.",
-                    features: [
-                        "Vehicle showcase system",
-                        "Service pages",
-                        "Showroom gallery",
-                        "Admin panel for lead management"
-                    ],
-                    tech: ["PHP", "MySQL", "JavaScript", "CSS"],
-                    url: "https://rajpootmotors.com/",
-                    impact: "Established online presence for automotive dealership",
-                    gradient: "from-orange-600 to-red-500"
-                },
-                {
-                    title: "UI Market",
-                    client: "Developer Component Hub",
-                    description: "Component marketplace for developers offering ready-to-use UI elements, icons, charts, and graphs with source code access.",
-                    features: [
-                        "Searchable component library",
-                        "Source code display with syntax highlighting",
-                        "Component categorization",
-                        "Free promotional tier"
-                    ],
-                    tech: ["PHP", "MySQL", "JavaScript", "CSS"],
-                    url: "https://devnesty.com/demo/component-hub/index.php",
-                    impact: "Resource platform for developer community",
-                    gradient: "from-indigo-600 to-purple-500"
-                }
-            ];
-
-            const companies = [
-                {
-                    name: "Tooliso",
+                    number: "04",
+                    title: "TOOLISO",
+                    subtitle: "ENTERPRISE SOLUTIONS",
                     tagline: "Where serious businesses build seriously powerful software",
-                    description: "Custom platforms, apps, and systems focused on ROI and scalability",
-                    url: "https://www.tooliso.com/"
+                    description: "Custom platforms, apps, and systems focused on ROI and scalability. Delivering enterprise-grade solutions that transform business operations.",
+                    url: "https://www.tooliso.com/",
+                    tech: ["React", "Node.js", "PostgreSQL", "AWS"],
+                    impact: "Scalable solutions for serious businesses"
                 },
                 {
-                    name: "Omendon",
-                    tagline: "Nordic-UAE Market Expansion",
-                    description: "Consulting and sales solutions for Finnish and Nordic companies expanding to UAE",
-                    url: "https://www.omendon.com/"
+                    number: "05",
+                    title: "DEVNESTY",
+                    subtitle: "DIGITAL AGENCY",
+                    tagline: "Full-service creative solutions",
+                    description: "Multi-page marketing platform with integrated lead generation and custom animations. Complete digital presence for modern agencies.",
+                    url: "https://devnesty.com/",
+                    tech: ["HTML", "CSS", "JavaScript", "PHP"],
+                    impact: "Professional presence generating qualified leads"
                 },
                 {
-                    name: "Devnesty",
-                    tagline: "Full-Service Digital Agency",
-                    description: "Creating competitive advantages through technology and innovation",
-                    url: "https://devnesty.com/"
+                    number: "06",
+                    title: "UI MARKET",
+                    subtitle: "DEVELOPER HUB",
+                    tagline: "Component marketplace",
+                    description: "Marketplace for developers offering ready-to-use UI elements with source code access. Comprehensive resource platform.",
+                    url: "https://devnesty.com/demo/component-hub/index.php",
+                    tech: ["PHP", "MySQL", "JavaScript"],
+                    impact: "Empowering developers with reusable components"
+                },
+                {
+                    number: "07",
+                    title: "RAJPOOT MOTORS",
+                    subtitle: "AUTOMOTIVE PLATFORM",
+                    tagline: "Digital showroom transformation",
+                    description: "Digital showroom platform with inventory management and integrated inquiry system. Modern automotive e-commerce solution.",
+                    url: "https://rajpootmotors.com/",
+                    tech: ["PHP", "MySQL", "JavaScript", "CSS"],
+                    impact: "Digital transformation for automotive dealership"
                 }
             ];
-
-            const skills = {
-                "Frontend": ["React", "JavaScript (ES6+)", "HTML5", "CSS3", "Responsive Design", "Animations"],
-                "Backend": ["PHP", "MySQL", "RESTful APIs", "Server Management"],
-                "Specialized": ["CRM Development", "Admin Panels", "Lead Management", "Business Automation"],
-                "Tools & Practices": ["Git", "E-commerce Solutions", "Dynamic Web Apps", "SEO Optimization"]
-            };
 
             return (
-                <div className="min-h-screen bg-[#0a0a0f] text-white overflow-x-hidden">
+                <div className="portfolio">
                     {/* Navigation */}
-                    <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled ? 'bg-[#0a0a0f]/95 backdrop-blur-md shadow-lg' : 'bg-transparent'}`}>
-                        <div className="max-w-7xl mx-auto px-6 py-4">
-                            <div className="flex justify-between items-center">
-                                <div className="text-xl md:text-2xl font-bold gradient-text code-font">&lt;Meysam Raza/&gt;</div>
-                                
-                                {/* Desktop Navigation */}
-                                <div className="desktop-nav flex items-center space-x-2">
-                                    {['Home', 'About', 'Projects', 'Experience', 'Skills', 'Contact'].map((item) => (
-                                        <button
-                                            key={item}
-                                            onClick={() => scrollToSection(item.toLowerCase())}
-                                            className={`nav-link capitalize hover:text-purple-400 transition-colors text-sm md:text-base ${activeSection === item.toLowerCase() ? 'active text-purple-400' : ''}`}
-                                        >
-                                            {item}
-                                        </button>
-                                    ))}
-                                </div>
-
-                                {/* Mobile Hamburger */}
-                                <div className={`hamburger ${mobileMenuOpen ? 'active' : ''}`} onClick={toggleMobileMenu}>
-                                    <span></span>
-                                    <span></span>
-                                    <span></span>
-                                </div>
+                    <nav className={`navbar ${scrolled ? 'scrolled' : ''}`}>
+                        <div className="nav-container">
+                            <div className="nav-brand">Meysam Raza</div>
+                            <div className="nav-links">
+                                <button onClick={() => scrollToSection('work')}>Work</button>
+                                <button onClick={() => scrollToSection('about')}>About</button>
+                                <button onClick={() => scrollToSection('skills')}>Capabilities</button>
+                                <button onClick={() => scrollToSection('contact')}>Contact</button>
                             </div>
-                        </div>
-
-                        {/* Mobile Menu */}
-                        <div className={`mobile-menu ${mobileMenuOpen ? 'active' : ''}`}>
-                            {['Home', 'About', 'Projects', 'Experience', 'Skills', 'Contact'].map((item) => (
-                                <button
-                                    key={item}
-                                    onClick={() => scrollToSection(item.toLowerCase())}
-                                    className={`nav-link capitalize hover:text-purple-400 transition-colors w-full ${activeSection === item.toLowerCase() ? 'text-purple-400' : ''}`}
-                                >
-                                    {item}
-                                </button>
-                            ))}
                         </div>
                     </nav>
 
                     {/* Hero Section */}
-                    <section id="home" className="min-h-screen flex items-center justify-center relative bg-mesh">
-                        <div className="absolute inset-0 overflow-hidden">
-                            <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-purple-600/10 rounded-full blur-3xl"></div>
-                            <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-blue-600/10 rounded-full blur-3xl"></div>
-                        </div>
-                        
-                        <div className="max-w-7xl mx-auto px-6 text-center z-10 fade-in">
-                            <div className="mb-6 mt-20">
-                                <span className="code-font text-purple-400 text-sm tracking-wider">FULL-STACK DEVELOPER</span>
-                            </div>
-                            <h1 className="text-5xl md:text-8xl font-black mb-6 leading-tight">
-                                Building Digital
-                                <br />
-                                <span className="gradient-text">Solutions That Drive</span>
-                                <br />
-                                Business Growth
+                    <section className="hero">
+                        <div className="hero-container">
+                            <h1 className="hero-title">
+                                MEYSAM<br/>
+                                RAZA®
                             </h1>
-                            <p className="text-lg md:text-2xl text-gray-400 mb-12 max-w-3xl mx-auto font-light">
-                                Specializing in custom CRM systems, dynamic web applications, and business automation that deliver measurable ROI
-                            </p>
-                            <div className="flex gap-6 justify-center flex-wrap">
-                                <button 
-                                    onClick={() => scrollToSection('projects')}
-                                    className="px-8 py-4 bg-gradient-to-r from-purple-600 to-blue-600 rounded-lg font-semibold hover:shadow-2xl hover:shadow-purple-500/50 transition-all flex items-center gap-2 glow-effect"
-                                >
-                                    View Projects <ArrowRight size={20} />
-                                </button>
-                                <button 
-                                    onClick={() => scrollToSection('contact')}
-                                    className="px-8 py-4 border-2 border-purple-600 rounded-lg font-semibold hover:bg-purple-600/20 transition-all"
-                                >
-                                    Let's Talk
-                                </button>
-                            </div>
-                            
-                            <div className="mt-20 scroll-indicator mx-auto w-fit">
-                                <ChevronDown />
+                            <div className="hero-subtitle">
+                                <div className="subtitle-line"></div>
+                                <p>FULL-STACK DEVELOPER - MERN STACK</p>
                             </div>
                         </div>
                     </section>
 
-                    {/* About Section */}
-                    <section id="about" className="py-32 px-6">
-                        <div className="max-w-6xl mx-auto">
-                            <div className="slide-in-left text-center mb-12">
-                                <h2 className="text-4xl md:text-5xl font-bold mb-6">
-                                    I Don't Just Code.
-                                    <br />
-                                    <span className="gradient-text">I Create Competitive Advantage.</span>
-                                </h2>
-                                <div className="max-w-4xl mx-auto">
-                                    <p className="text-gray-400 text-lg mb-6 leading-relaxed">
-                                        I'm a full-stack developer with 2 years of experience building platforms that make money, save time, and scale without limits. From CRM systems managing 50+ employees to dynamic travel platforms automating lead distribution, I create solutions that solve real business problems.
+                    {/* Intro Section */}
+                    <section className="intro" id="about">
+                        <div className="intro-container">
+                            <div className="intro-number">/INTRO</div>
+                            <h2 className="intro-title">
+                                BUILDING<br/>
+                                DIGITAL<br/>
+                                SOLUTIONS
+                            </h2>
+                            <div className="intro-content">
+                                <div className="quote-mark">"</div>
+                                <div className="intro-text">
+                                    <p className="intro-highlight">
+                                        Where innovation meets execution. At Meysam Raza Studio, 
+                                        each project is a unique experience, built with precision 
+                                        and celebrating technical excellence.
                                     </p>
-                                    <p className="text-gray-400 text-lg mb-8 leading-relaxed">
-                                        My expertise spans React, PHP, MySQL, and JavaScript, with a focus on creating custom systems that drive business automation and operational efficiency. I've worked with forward-thinking companies like Tooliso, Omendon, and Devnesty to deliver results-driven solutions.
-                                    </p>
-                                </div>
-                                
-                                <div className="flex justify-center flex-wrap gap-3 max-w-2xl mx-auto mb-16">
-                                    {["React", "PHP", "MySQL", "JavaScript", "HTML5", "CSS3", "CRM Systems", "APIs"].map((tech, i) => (
-                                        <div 
-                                            key={tech}
-                                            className="tech-badge bg-gradient-to-br from-purple-600/20 to-blue-600/20 border border-purple-500/30 rounded-lg px-4 py-2 text-sm font-semibold"
-                                            style={{ animationDelay: `${i * 0.1}s` }}
-                                        >
-                                            {tech}
+                                    <div className="intro-stats">
+                                        <div className="stat-item">
+                                            <span className="stat-number">01</span>
+                                            <p>Specializing in React, PHP, and enterprise CRM systems that deliver measurable ROI and transform business operations.</p>
                                         </div>
-                                    ))}
-                                </div>
-                            </div>
-                            
-                            <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 max-w-5xl mx-auto">
-                                <div className="stat-card bg-gradient-to-br from-purple-600/20 to-transparent border border-purple-500/30 rounded-2xl p-6 text-center">
-                                    <Code size={40} className="mx-auto mb-4 text-purple-400" />
-                                    <h3 className="text-3xl font-bold mb-2">5+</h3>
-                                    <p className="text-gray-400 text-sm">Major Projects Delivered</p>
-                                </div>
-                                <div className="stat-card bg-gradient-to-br from-blue-600/20 to-transparent border border-blue-500/30 rounded-2xl p-6 text-center">
-                                    <Users size={40} className="mx-auto mb-4 text-blue-400" />
-                                    <h3 className="text-3xl font-bold mb-2">50+</h3>
-                                    <p className="text-gray-400 text-sm">Users Managed via CRM</p>
-                                </div>
-                                <div className="stat-card bg-gradient-to-br from-cyan-600/20 to-transparent border border-cyan-500/30 rounded-2xl p-6 text-center">
-                                    <Zap size={40} className="mx-auto mb-4 text-cyan-400" />
-                                    <h3 className="text-3xl font-bold mb-2">15+</h3>
-                                    <p className="text-gray-400 text-sm">Hours Saved Weekly</p>
-                                </div>
-                                <div className="stat-card bg-gradient-to-br from-pink-600/20 to-transparent border border-pink-500/30 rounded-2xl p-6 text-center">
-                                    <Database size={40} className="mx-auto mb-4 text-pink-400" />
-                                    <h3 className="text-3xl font-bold mb-2">100%</h3>
-                                    <p className="text-gray-400 text-sm">Business Automation</p>
+                                        <div className="stat-item">
+                                            <span className="stat-number">02</span>
+                                            <p>Leading businesses choose me because I preserve technical excellence while pushing creative boundaries in web development.</p>
+                                        </div>
+                                    </div>
+                                    <div className="intro-footer">
+                                        <a href="mailto:arazameysam@gmail.com" className="intro-link">
+                                            Email Me <ArrowRight size={16} />
+                                        </a>
+                                        <span className="intro-location">Lahore, Pakistan</span>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </section>
 
                     {/* Projects Section */}
-                    <section id="projects" className="py-32 px-6 bg-gradient-to-b from-transparent to-purple-950/10">
-                        <div className="max-w-7xl mx-auto">
-                            <div className="text-center mb-16 zoom-in">
-                                <h2 className="text-5xl font-bold mb-4">Featured Projects</h2>
-                                <p className="text-gray-400 text-xl">Solutions that drive real business results</p>
+                    <section className="projects" id="work">
+                        <div className="projects-container">
+                            <div className="projects-intro">
+                                <h2 className="projects-intro-title">Featured Projects</h2>
+                                <p className="projects-intro-subtitle">Solutions that drive real business results</p>
                             </div>
+                            {projects.map((project, index) => (
+                                <div key={index} className="project-block">
+                                    <div className="project-header">
+                                        <h3 className="project-title">
+                                            {project.title}
+                                            <span className="project-number">/{project.number}</span>
+                                        </h3>
+                                        <div className="project-subtitle-line"></div>
+                                        <p className="project-subtitle">{project.subtitle}</p>
+                                    </div>
 
-                            <div className="grid gap-16">
-                                {projects.map((project, index) => (
-                                    <div 
-                                        key={index}
-                                        className="zoom-in"
-                                        style={{ animationDelay: `${index * 0.1}s` }}
-                                    >
-                                        <div className="project-card rounded-2xl p-8 md:p-10 max-w-5xl mx-auto">
-                                            {/* Project Header */}
-                                            <div className="flex items-start justify-between mb-6 flex-wrap gap-4">
-                                                <div>
-                                                    <h3 className="text-2xl md:text-3xl font-bold mb-2">{project.title}</h3>
-                                                    <p className={`text-transparent bg-clip-text bg-gradient-to-r ${project.gradient} font-semibold text-lg`}>
-                                                        {project.client}
-                                                    </p>
-                                                </div>
-                                                <a 
-                                                    href={project.url}
-                                                    target="_blank"
-                                                    rel="noopener noreferrer"
-                                                    className="p-3 bg-purple-600/20 hover:bg-purple-600/40 rounded-lg transition-all group"
-                                                >
-                                                    <ExternalLink size={24} />
-                                                </a>
-                                            </div>
-
-                                            {/* Website Preview */}
-                                            <div className="iframe-container mb-6">
+                                    <div className="project-content">
+                                        <div className="project-preview">
+                                            <div className="preview-frame">
                                                 <iframe 
                                                     src={project.url}
                                                     title={project.title}
@@ -847,172 +238,725 @@
                                                     sandbox="allow-scripts allow-same-origin"
                                                 ></iframe>
                                             </div>
-                                            
-                                            {/* Description */}
-                                            <p className="text-gray-400 text-lg mb-6 leading-relaxed">
-                                                {project.description}
-                                            </p>
-                                            
-                                            {/* Key Features */}
-                                            <div className="mb-6">
-                                                <h4 className="text-sm font-semibold text-purple-400 mb-3 uppercase tracking-wider">Key Features</h4>
-                                                <ul className="grid md:grid-cols-2 gap-2">
-                                                    {project.features.map((feature, i) => (
-                                                        <li key={i} className="flex items-start gap-2 text-gray-400">
-                                                            <span className="text-purple-400 mt-1">▹</span>
-                                                            <span className="text-sm">{feature}</span>
-                                                        </li>
-                                                    ))}
-                                                </ul>
-                                            </div>
-                                            
-                                            {/* Impact Badge */}
-                                            <div className="bg-green-500/10 border border-green-500/30 rounded-lg p-4 mb-6">
-                                                <p className="text-green-400 font-semibold flex items-center gap-2 justify-center md:justify-start">
-                                                    <Zap size={18} />
-                                                    Impact: {project.impact}
-                                                </p>
-                                            </div>
+                                        </div>
 
-                                            {/* Tech Stack */}
-                                            <div className="flex flex-wrap gap-2 justify-center">
-                                                {project.tech.map((tech, i) => (
-                                                    <span 
-                                                        key={i}
-                                                        className={`code-font px-3 py-2 bg-gradient-to-r ${project.gradient} bg-opacity-20 rounded-lg text-sm border border-white/10`}
-                                                    >
-                                                        {tech}
-                                                    </span>
-                                                ))}
+                                        <div className="project-info">
+                                            <div className="project-meta">
+                                                <div className="meta-item">
+                                                    <span className="meta-label">CLIENT</span>
+                                                    <p className="meta-value">{project.tagline}</p>
+                                                </div>
+                                                <div className="meta-item">
+                                                    <span className="meta-label">DESCRIPTION</span>
+                                                    <p className="meta-value">{project.description}</p>
+                                                </div>
+                                                <div className="meta-item">
+                                                    <span className="meta-label">IMPACT</span>
+                                                    <p className="meta-value impact-text">{project.impact}</p>
+                                                </div>
+                                                <div className="meta-item">
+                                                    <span className="meta-label">STACK</span>
+                                                    <div className="tech-list">
+                                                        {project.tech.map((tech, i) => (
+                                                            <span key={i} className="tech-item">{tech}</span>
+                                                        ))}
+                                                    </div>
+                                                </div>
                                             </div>
+                                            <a 
+                                                href={project.url}
+                                                target="_blank"
+                                                rel="noopener noreferrer"
+                                                className="project-link"
+                                            >
+                                                Visit Live Site <ExternalLink size={20} />
+                                            </a>
                                         </div>
                                     </div>
-                                ))}
-                            </div>
-                        </div>
-                    </section>
-
-                    {/* Experience Section */}
-                    <section id="experience" className="py-32 px-6">
-                        <div className="max-w-5xl mx-auto">
-                            <div className="text-center mb-16 zoom-in">
-                                <h2 className="text-5xl font-bold mb-4">Where I Create Impact</h2>
-                                <p className="text-gray-400 text-xl">Building solutions for forward-thinking companies</p>
-                            </div>
-
-                            <div className="grid md:grid-cols-3 gap-8">
-                                {companies.map((company, index) => (
-                                    <div 
-                                        key={index}
-                                        className="experience-card rounded-2xl p-8 card-glow text-center"
-                                        style={{ animationDelay: `${index * 0.1}s` }}
-                                    >
-                                        <h3 className="text-2xl font-bold mb-2">{company.name}</h3>
-                                        <p className="text-purple-400 font-semibold mb-4">{company.tagline}</p>
-                                        <p className="text-gray-400 mb-6 leading-relaxed">{company.description}</p>
-                                        <a 
-                                            href={company.url}
-                                            target="_blank"
-                                            rel="noopener noreferrer"
-                                            className="inline-flex items-center gap-2 text-purple-400 hover:text-purple-300 transition-colors font-semibold"
-                                        >
-                                            Visit Website <ExternalLink size={16} />
-                                        </a>
-                                    </div>
-                                ))}
-                            </div>
+                                </div>
+                            ))}
                         </div>
                     </section>
 
                     {/* Skills Section */}
-                    <section id="skills" className="py-32 px-6 bg-gradient-to-b from-transparent to-blue-950/10">
-                        <div className="max-w-5xl mx-auto">
-                            <div className="text-center mb-16 zoom-in">
-                                <h2 className="text-5xl font-bold mb-4">Technical Expertise</h2>
-                                <p className="text-gray-400 text-xl">Full-stack capabilities with a focus on business value</p>
+                    <section className="skills" id="skills">
+                        <div className="skills-container">
+                            <div className="skills-header">
+                                <h3 className="skills-title">CAPABILITIES</h3>
+                                <span className="skills-number">/TECH</span>
                             </div>
-
-                            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-                                {Object.entries(skills).map(([category, items], index) => (
-                                    <div 
-                                        key={category}
-                                        className="bg-gradient-to-br from-[#11111b]/80 to-[#11111b]/40 backdrop-blur-lg border border-purple-500/20 rounded-2xl p-8 card-glow text-center"
-                                        style={{ animationDelay: `${index * 0.1}s` }}
-                                    >
-                                        <h3 className="text-xl font-bold mb-6 text-purple-400">{category}</h3>
-                                        <ul className="space-y-3">
-                                            {items.map((skill, i) => (
-                                                <li key={i} className="flex items-center justify-center gap-2 text-gray-300 text-sm">
-                                                    <Layers size={16} className="text-purple-400 flex-shrink-0" />
-                                                    <span>{skill}</span>
-                                                </li>
-                                            ))}
-                                        </ul>
-                                    </div>
-                                ))}
+                            <div className="skills-grid">
+                                <div className="skill-category">
+                                    <h4>FRONTEND</h4>
+                                    <ul>
+                                        <li>React</li>
+                                        <li>JavaScript ES6+</li>
+                                        <li>HTML5 & CSS3</li>
+                                        <li>Responsive Design</li>
+                                    </ul>
+                                </div>
+                                <div className="skill-category">
+                                    <h4>BACKEND</h4>
+                                    <ul>
+                                        <li>PHP</li>
+                                        <li>MySQL</li>
+                                        <li>RESTful APIs</li>
+                                        <li>Node.js</li>
+                                    </ul>
+                                </div>
+                                <div className="skill-category">
+                                    <h4>PLATFORMS</h4>
+                                    <ul>
+                                        <li>CRM Systems</li>
+                                        <li>Admin Panels</li>
+                                        <li>E-commerce</li>
+                                        <li>Lead Management</li>
+                                    </ul>
+                                </div>
+                                <div className="skill-category">
+                                    <h4>TOOLS</h4>
+                                    <ul>
+                                        <li>Git & GitHub</li>
+                                        <li>Docker</li>
+                                        <li>AWS</li>
+                                        <li>Database Design</li>
+                                    </ul>
+                                </div>
                             </div>
                         </div>
                     </section>
 
                     {/* Contact Section */}
-                    <section id="contact" className="py-32 px-6">
-                        <div className="max-w-4xl mx-auto text-center">
-                            <h2 className="text-4xl md:text-6xl font-bold mb-6">
-                                Let's Build Something
-                                <br />
-                                <span className="gradient-text">Great Together</span>
+                    <section className="contact" id="contact">
+                        <div className="contact-container">
+                            <h2 className="contact-title">
+                                LET'S BUILD<br/>
+                                SOMETHING<br/>
+                                GREAT<br/>
+                                TOGETHER
                             </h2>
-                            <p className="text-gray-400 text-xl mb-12 max-w-2xl mx-auto">
-                                Whether you need a custom CRM, a dynamic web application, or a complete business automation solution, I'm here to turn your vision into reality.
-                            </p>
-                            
-                            <div className="flex gap-6 justify-center flex-wrap mb-12">
-                                <a 
-                                    href="mailto:arazameysam@gmail.com"
-                                    className="px-8 py-4 bg-gradient-to-r from-purple-600 to-blue-600 rounded-lg font-semibold hover:shadow-2xl hover:shadow-purple-500/50 transition-all flex items-center gap-2 glow-effect"
-                                >
-                                    <Mail size={20} />
-                                    Send Email
-                                </a>
-                                <a 
-                                    href="https://www.linkedin.com/in/meysam-raza-294247358?utm_source=share_via&utm_content=profile&utm_medium=member_android"
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className="px-8 py-4 border-2 border-purple-600 rounded-lg font-semibold hover:bg-purple-600/20 transition-all flex items-center gap-2"
-                                >
-                                    <Linkedin size={20} />
-                                    LinkedIn
-                                </a>
-                                <a 
-                                    href="https://www.upwork.com/freelancers/~013477f1d13d67e3e1?mp_source=share"
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className="px-8 py-4 border-2 border-purple-600 rounded-lg font-semibold hover:bg-purple-600/20 transition-all flex items-center gap-2"
-                                >
-                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                                        <path d="M18.561 13.158c-1.102 0-2.135-.467-3.074-1.227l.228-1.076.008-.042c.207-1.143.849-3.06 2.839-3.06 1.492 0 2.703 1.212 2.703 2.703-.001 1.489-1.212 2.702-2.704 2.702zm0-8.14c-2.539 0-4.51 1.649-5.31 4.366-1.22-1.834-2.148-4.036-2.687-5.892H7.828v7.112c-.002 1.406-1.141 2.546-2.547 2.548-1.405-.002-2.543-1.143-2.545-2.548V3.492H0v7.112c0 2.914 2.37 5.303 5.281 5.303 2.913 0 5.283-2.389 5.283-5.303v-1.19c.529 1.107 1.182 2.229 1.974 3.221l-1.673 7.873h2.797l1.213-5.71c1.063.679 2.285 1.109 3.686 1.109 3 0 5.439-2.452 5.439-5.45 0-3-2.439-5.439-5.439-5.439z"/>
-                                    </svg>
-                                    Upwork
-                                </a>
-                            </div>
-                            
-                            <div className="code-font text-gray-600 text-sm">
-                                &lt;Built with React · Designed to impress · Coded with passion /&gt;
+                            <div className="contact-content">
+                                <div className="contact-info">
+                                    <p className="contact-description">
+                                        Whether you need a custom CRM, a dynamic web application, or a complete 
+                                        business automation solution, I'm here to turn your vision into reality.
+                                    </p>
+                                    <a href="mailto:arazameysam@gmail.com" className="contact-email">
+                                       arazameysam@gmail.com
+                                    </a>
+                                    <div className="contact-links">
+                                        <a href="https://www.linkedin.com/in/meysam-raza-294247358" target="_blank" rel="noopener noreferrer">
+                                            LinkedIn
+                                        </a>
+                                        <a href="https://www.upwork.com/freelancers/~013477f1d13d67e3e1" target="_blank" rel="noopener noreferrer">
+                                            Upwork
+                                        </a>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </section>
 
                     {/* Footer */}
-                    <footer className="border-t border-purple-500/20 py-8 px-6">
-                        <div className="max-w-7xl mx-auto text-center text-gray-500">
-                            <p>© 2026 Full-Stack Developer. Creating digital solutions that drive business growth.</p>
+                    <footer className="footer">
+                        <div className="footer-container">
+                            <p>&lt;Built with React · Designed to impress · Coded with passion /&gt;</p>
+                            <p>© 2025 Meysam Raza. All rights reserved.</p>
                         </div>
                     </footer>
+
+                    <style>{`
+                        :root {
+                            --black: #0a0a0a;
+                            --white: #ffffff;
+                            --gray: #888888;
+                            --light-gray: #cccccc;
+                            --accent: #ff4400;
+                        }
+
+                        .portfolio {
+                            background: var(--black);
+                            color: var(--white);
+                        }
+
+                        /* Navigation */
+                        .navbar {
+                            position: fixed;
+                            top: 0;
+                            left: 0;
+                            right: 0;
+                            z-index: 1000;
+                            padding: 2rem 0;
+                            transition: all 0.3s ease;
+                        }
+
+                        .navbar.scrolled {
+                            background: rgba(10, 10, 10, 0.95);
+                            backdrop-filter: blur(10px);
+                            padding: 1.5rem 0;
+                            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+                        }
+
+                        .nav-container {
+                            max-width: 1400px;
+                            margin: 0 auto;
+                            padding: 0 4rem;
+                            display: flex;
+                            justify-content: space-between;
+                            align-items: center;
+                        }
+
+                        .nav-brand {
+                            font-size: 0.9rem;
+                            font-weight: 500;
+                            letter-spacing: 0.05em;
+                        }
+
+                        .nav-links {
+                            display: flex;
+                            gap: 3rem;
+                        }
+
+                        .nav-links button {
+                            background: none;
+                            border: none;
+                            color: var(--gray);
+                            font-size: 0.9rem;
+                            font-weight: 500;
+                            cursor: pointer;
+                            transition: color 0.3s ease;
+                            letter-spacing: 0.05em;
+                            text-transform: uppercase;
+                        }
+
+                        .nav-links button:hover {
+                            color: var(--white);
+                        }
+
+                        /* Hero */
+                        .hero {
+                            min-height: 100vh;
+                            display: flex;
+                            align-items: center;
+                            padding: 0 4rem;
+                        }
+
+                        .hero-container {
+                            max-width: 1400px;
+                            margin: 0 auto;
+                            width: 100%;
+                        }
+
+                        .hero-title {
+                            font-size: clamp(4rem, 12vw, 14rem);
+                            font-weight: 700;
+                            line-height: 0.9;
+                            letter-spacing: -0.03em;
+                            margin-bottom: 3rem;
+                        }
+
+                        .hero-subtitle {
+                            display: flex;
+                            align-items: center;
+                            gap: 2rem;
+                        }
+
+                        .subtitle-line {
+                            width: 80px;
+                            height: 1px;
+                            background: var(--white);
+                        }
+
+                        .hero-subtitle p {
+                            font-size: 1rem;
+                            letter-spacing: 0.15em;
+                            font-weight: 500;
+                        }
+
+                        /* Intro */
+                        .intro {
+                            padding: 8rem 4rem;
+                        }
+
+                        .intro-container {
+                            max-width: 1400px;
+                            margin: 0 auto;
+                        }
+
+                        .intro-number {
+                            font-size: 0.9rem;
+                            letter-spacing: 0.1em;
+                            color: var(--gray);
+                            margin-bottom: 3rem;
+                        }
+
+                        .intro-title {
+                            font-size: clamp(3rem, 8vw, 8rem);
+                            font-weight: 700;
+                            line-height: 0.95;
+                            letter-spacing: -0.02em;
+                            margin-bottom: 4rem;
+                        }
+
+                        .intro-content {
+                            display: grid;
+                            grid-template-columns: 200px 1fr;
+                            gap: 4rem;
+                        }
+
+                        .quote-mark {
+                            font-size: 15rem;
+                            font-weight: 300;
+                            line-height: 0.7;
+                            color: rgba(255, 68, 0, 0.3);
+                        }
+
+                        .intro-text {
+                            max-width: 800px;
+                        }
+
+                        .intro-highlight {
+                            font-size: 1.3rem;
+                            line-height: 1.6;
+                            margin-bottom: 3rem;
+                            color: var(--light-gray);
+                        }
+
+                        .intro-stats {
+                            display: flex;
+                            flex-direction: column;
+                            gap: 2rem;
+                            margin-bottom: 3rem;
+                        }
+
+                        .stat-item {
+                            display: grid;
+                            grid-template-columns: 60px 1fr;
+                            gap: 2rem;
+                        }
+
+                        .stat-number {
+                            font-size: 0.9rem;
+                            color: var(--gray);
+                            letter-spacing: 0.1em;
+                        }
+
+                        .stat-item p {
+                            font-size: 1rem;
+                            line-height: 1.6;
+                            color: var(--gray);
+                        }
+
+                        .intro-footer {
+                            display: flex;
+                            justify-content: space-between;
+                            align-items: center;
+                            padding-top: 2rem;
+                            border-top: 1px solid rgba(255, 255, 255, 0.1);
+                        }
+
+                        .intro-link {
+                            color: var(--white);
+                            text-decoration: none;
+                            display: flex;
+                            align-items: center;
+                            gap: 0.5rem;
+                            font-size: 0.9rem;
+                            letter-spacing: 0.05em;
+                            transition: color 0.3s ease;
+                        }
+
+                        .intro-link:hover {
+                            color: var(--accent);
+                        }
+
+                        .intro-location {
+                            font-size: 0.9rem;
+                            color: var(--gray);
+                        }
+
+                        /* Projects */
+                        .projects {
+                            padding: 4rem 4rem 8rem;
+                        }
+
+                        .projects-container {
+                            max-width: 1400px;
+                            margin: 0 auto;
+                        }
+
+                        .projects-intro {
+                            margin-bottom: 6rem;
+                            text-align: center;
+                        }
+
+                        .projects-intro-title {
+                            font-size: clamp(2.5rem, 6vw, 5rem);
+                            font-weight: 700;
+                            letter-spacing: -0.02em;
+                            margin-bottom: 1rem;
+                        }
+
+                        .projects-intro-subtitle {
+                            font-size: 1.2rem;
+                            color: var(--gray);
+                            letter-spacing: 0.02em;
+                        }
+
+                        .project-block {
+                            margin-bottom: 6rem;
+                        }
+
+                        .project-header {
+                            margin-bottom: 4rem;
+                        }
+
+                        .project-title {
+                            font-size: clamp(3rem, 6vw, 7rem);
+                            font-weight: 700;
+                            line-height: 0.9;
+                            letter-spacing: -0.02em;
+                            margin-bottom: 1rem;
+                            display: flex;
+                            align-items: baseline;
+                            gap: 2rem;
+                        }
+
+                        .project-number {
+                            font-size: clamp(2rem, 4vw, 4rem);
+                            font-weight: 300;
+                            color: var(--gray);
+                        }
+
+                        .project-subtitle-line {
+                            width: 100px;
+                            height: 1px;
+                            background: var(--white);
+                            margin: 2rem 0 1rem;
+                        }
+
+                        .project-subtitle {
+                            font-size: 1rem;
+                            letter-spacing: 0.15em;
+                            color: var(--gray);
+                        }
+
+                        .project-content {
+                            display: grid;
+                            grid-template-columns: 1fr 1fr;
+                            gap: 3rem;
+                            align-items: start;
+                        }
+
+                        .project-preview {
+                            position: relative;
+                            height: fit-content;
+                        }
+
+                        .preview-frame {
+                            position: relative;
+                            width: 100%;
+                            height: 550px;
+                            background: rgba(255, 255, 255, 0.05);
+                            border: 1px solid rgba(255, 255, 255, 0.1);
+                            overflow: hidden;
+                        }
+
+                        .preview-frame iframe {
+                            position: absolute;
+                            top: 0;
+                            left: 0;
+                            width: 100%;
+                            height: 100%;
+                            border: none;
+                        }
+
+                        .project-info {
+                            display: flex;
+                            flex-direction: column;
+                            gap: 3rem;
+                        }
+
+                        .project-meta {
+                            display: flex;
+                            flex-direction: column;
+                            gap: 1.25rem;
+                        }
+
+                        .meta-item {
+                            display: flex;
+                            flex-direction: column;
+                            gap: 0.5rem;
+                        }
+
+                        .meta-label {
+                            font-size: 0.8rem;
+                            letter-spacing: 0.15em;
+                            color: var(--gray);
+                        }
+
+                        .meta-value {
+                            font-size: 1.1rem;
+                            line-height: 1.6;
+                            color: var(--light-gray);
+                        }
+
+                        .impact-text {
+                            color: var(--accent);
+                        }
+
+                        .tech-list {
+                            display: flex;
+                            flex-wrap: wrap;
+                            gap: 1rem;
+                        }
+
+                        .tech-item {
+                            font-size: 0.9rem;
+                            padding: 0.5rem 1rem;
+                            border: 1px solid rgba(255, 255, 255, 0.2);
+                            color: var(--light-gray);
+                            transition: all 0.3s ease;
+                            cursor: default;
+                        }
+
+                        .tech-item:hover {
+                            background: rgba(255, 255, 255, 0.05);
+                            border-color: var(--white);
+                            color: var(--white);
+                        }
+
+                        .project-link {
+                            display: inline-flex;
+                            align-items: center;
+                            gap: 0.75rem;
+                            color: var(--white);
+                            text-decoration: none;
+                            font-size: 0.9rem;
+                            letter-spacing: 0.05em;
+                            padding: 1rem 0;
+                            border-top: 1px solid rgba(255, 255, 255, 0.1);
+                            transition: color 0.3s ease;
+                        }
+
+                        .project-link:hover {
+                            color: var(--accent);
+                        }
+
+                        /* Skills */
+                        .skills {
+                            padding: 4rem 4rem;
+                            background: rgba(255, 255, 255, 0.02);
+                        }
+
+                        .skills-container {
+                            max-width: 1400px;
+                            margin: 0 auto;
+                        }
+
+                        .skills-header {
+                            display: flex;
+                            justify-content: space-between;
+                            align-items: center;
+                            margin-bottom: 4rem;
+                        }
+
+                        .skills-title {
+                            font-size: clamp(2rem, 5vw, 4rem);
+                            font-weight: 700;
+                            letter-spacing: -0.02em;
+                        }
+
+                        .skills-number {
+                            font-size: 1rem;
+                            color: var(--gray);
+                            letter-spacing: 0.1em;
+                        }
+
+                        .skills-grid {
+                            display: grid;
+                            grid-template-columns: repeat(4, 1fr);
+                            gap: 4rem;
+                        }
+
+                        .skill-category h4 {
+                            font-size: 0.9rem;
+                            letter-spacing: 0.1em;
+                            margin-bottom: 1.5rem;
+                            color: var(--gray);
+                        }
+
+                        .skill-category ul {
+                            list-style: none;
+                        }
+
+                        .skill-category li {
+                            font-size: 1.1rem;
+                            line-height: 2;
+                            color: var(--light-gray);
+                            transition: all 0.3s ease;
+                            cursor: default;
+                        }
+
+                        .skill-category li:hover {
+                            color: var(--white);
+                            transform: translateX(5px);
+                        }
+
+                        /* Contact */
+                        .contact {
+                            padding: 4rem 4rem;
+                        }
+
+                        .contact-container {
+                            max-width: 1400px;
+                            margin: 0 auto;
+                        }
+
+                        .contact-title {
+                            font-size: clamp(4rem, 10vw, 10rem);
+                            font-weight: 700;
+                            line-height: 0.9;
+                            letter-spacing: -0.03em;
+                            margin-bottom: 3rem;
+                        }
+
+                        .contact-description {
+                            font-size: 1.3rem;
+                            line-height: 1.7;
+                            color: var(--light-gray);
+                            margin-bottom: 3rem;
+                            max-width: 700px;
+                        }
+
+                        .contact-email {
+                            font-size: 1.3rem;
+                            color: var(--white);
+                            text-decoration: none;
+                            display: block;
+                            margin-bottom: 2rem;
+                            transition: color 0.3s ease;
+                            letter-spacing: 0.02em;
+                        }
+
+                        .contact-email:hover {
+                            color: var(--accent);
+                        }
+
+                        .contact-links {
+                            display: flex;
+                            gap: 3rem;
+                        }
+
+                        .contact-links a {
+                            color: var(--gray);
+                            text-decoration: none;
+                            font-size: 2rem;
+                            letter-spacing: 0.05em;
+                            transition: color 0.3s ease;
+                        }
+
+                        .contact-links a:hover {
+                            color: var(--white);
+                        }
+
+                        /* Footer */
+                        .footer {
+                            padding: 4rem;
+                            border-top: 1px solid rgba(255, 255, 255, 0.1);
+                        }
+
+                        .footer-container {
+                            max-width: 1400px;
+                            margin: 0 auto;
+                            display: flex;
+                            justify-content: space-between;
+                            font-size: 0.9rem;
+                            color: var(--gray);
+                        }
+
+                        /* Mobile Responsive */
+                        @media (max-width: 1024px) {
+                            .nav-container,
+                            .hero,
+                            .intro,
+                            .projects,
+                            .skills,
+                            .contact,
+                            .footer {
+                                padding-left: 2rem;
+                                padding-right: 2rem;
+                            }
+
+                            .intro-content {
+                                grid-template-columns: 1fr;
+                            }
+
+                            .quote-mark {
+                                font-size: 8rem;
+                            }
+
+                            .project-content {
+                                grid-template-columns: 1fr;
+                                gap: 2rem;
+                            }
+
+                            .preview-frame {
+                                height: 400px;
+                            }
+
+                            .skills-grid {
+                                grid-template-columns: repeat(2, 1fr);
+                                gap: 3rem;
+                            }
+
+                            .footer-container {
+                                flex-direction: column;
+                                gap: 1rem;
+                            }
+                        }
+
+                        @media (max-width: 640px) {
+                            .nav-links {
+                                gap: 1.5rem;
+                            }
+
+                            .nav-links button {
+                                font-size: 0.8rem;
+                            }
+
+                            .intro-content {
+                                gap: 2rem;
+                            }
+
+                            .stat-item {
+                                grid-template-columns: 1fr;
+                                gap: 0.5rem;
+                            }
+
+                            .project-title {
+                                flex-direction: column;
+                                gap: 0.5rem;
+                                align-items: flex-start;
+                            }
+
+                            .skills-grid {
+                                grid-template-columns: 1fr;
+                                gap: 2rem;
+                            }
+
+                            .contact-links {
+                                flex-direction: column;
+                                gap: 1rem;
+                            }
+                        }
+                    `}</style>
                 </div>
             );
         };
 
-        ReactDOM.render(<Portfolio />, document.getElementById('root'));
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+        root.render(<Portfolio />);
     </script>
 </body>
 </html>
