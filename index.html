@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Meysam Raza — Portfolio</title>
+  <title>Meysam Raza</title>
   <meta property="og:title" content="Meysam Raza — Cloud Architect & Full-Stack Dev">
   <meta property="og:description" content="AWS infra, MERN apps, applied AI — production work, not tutorials.">
   <meta property="og:image" content="preview.png">
@@ -286,25 +286,37 @@
       background: var(--line);
       border: 1px solid var(--line);
       border-radius: 12px;
-      overflow: hidden;
+      /* overflow:hidden removed — it clips translateY animations on child cards */
     }
 
+    /* corner cards carry the radius so no overflow:hidden needed */
+    .about-card:first-child { border-radius: 11px 0 0 11px; }
+    .about-card:last-child  { border-radius: 0 11px 11px 0; }
+
     @media (max-width:960px) {
-      .about-grid {
-        grid-template-columns: repeat(2, 1fr);
-      }
+      .about-grid { grid-template-columns: repeat(2, 1fr); }
+      .about-card:first-child  { border-radius: 11px 0 0 0; }
+      .about-card:nth-child(2) { border-radius: 0 11px 0 0; }
+      .about-card:nth-child(3) { border-radius: 0 0 0 11px; }
+      .about-card:last-child   { border-radius: 0 0 11px 0; }
     }
 
     @media (max-width:520px) {
-      .about-grid {
-        grid-template-columns: 1fr;
-      }
+      .about-grid { grid-template-columns: 1fr; }
+      .about-card:first-child { border-radius: 11px 11px 0 0; }
+      .about-card:last-child  { border-radius: 0 0 11px 11px; }
+      .about-card:nth-child(2),
+      .about-card:nth-child(3) { border-radius: 0; }
     }
 
     .about-card {
       background: var(--bg);
       padding: 36px 30px;
-      transition: background 0.3s ease, box-shadow 0.3s ease;
+      transition:
+        opacity 0.9s cubic-bezier(.16, .8, .24, 1),
+        transform 0.9s cubic-bezier(.16, .8, .24, 1),
+        background 0.3s ease,
+        box-shadow 0.3s ease;
     }
 
     .about-card:hover {
